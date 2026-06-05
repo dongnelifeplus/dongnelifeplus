@@ -6,6 +6,8 @@ SERVICE_KEY = "3d3dabc9d1fd62b04feccda19172466f925c89aab1a5f815b952e649ec73a8df"
 
 today = datetime.now().strftime("%Y%m%d")
 
+AREA_NAME = "관양동"
+
 url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
 
 params = {
@@ -23,6 +25,10 @@ response = requests.get(url, params=params)
 
 print("상태코드:", response.status_code)
 print(response.text)
+
+if response.status_code != 200:
+    print("오류 발생:", response.status_code)
+    exit()
 
 data = response.json()
 
@@ -53,6 +59,7 @@ else:
     sky_text = "정보없음"
 
 print("===== 우리동네라이프플러스 =====")
+print("지역:", AREA_NAME)
 print("현재 기온:", temp, "도")
 print("강수확률:", pop, "%")
 print("하늘상태:", sky_text)

@@ -8,7 +8,18 @@ today = datetime.now().strftime("%Y%m%d")
 
 AREA_NAME = "관양동"
 
+AREAS = {
+    "관양동": {"nx": "59", "ny": "123"},
+    "평촌동": {"nx": "59", "ny": "123"},
+    "범계동": {"nx": "59", "ny": "123"},
+    "비산동": {"nx": "59", "ny": "124"},
+    "호계동": {"nx": "60", "ny": "123"}
+}
+
 url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+
+nx = AREAS[AREA_NAME]["nx"]
+ny = AREAS[AREA_NAME]["ny"]
 
 params = {
     "serviceKey": SERVICE_KEY,
@@ -17,8 +28,8 @@ params = {
     "dataType": "JSON",
     "base_date": today,
     "base_time": "0500",
-    "nx": "59",
-    "ny": "123"
+    "nx": nx,
+    "ny": ny
 }
 
 response = requests.get(url, params=params)

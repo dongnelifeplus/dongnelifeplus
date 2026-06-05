@@ -1,6 +1,10 @@
 import requests
+from datetime import datetime
+import os
 
 SERVICE_KEY = "3d3dabc9d1fd62b04feccda19172466f925c89aab1a5f815b952e649ec73a8df"
+
+today = datetime.now().strftime("%Y%m%d")
 
 url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
 
@@ -9,7 +13,7 @@ params = {
     "pageNo": "1",
     "numOfRows": "100",
     "dataType": "JSON",
-    "base_date": "20260605",
+    "base_date": today,
     "base_time": "0500",
     "nx": "59",
     "ny": "123"
@@ -89,4 +93,8 @@ else:
 with open("index.html", "w", encoding="utf-8") as file:
     file.write(html)
 
-print("index.html 자동 생성 완료")
+os.system("git add .")
+os.system('git commit -m "자동 날씨 업데이트"')
+os.system("git push")
+
+print("GitHub 자동 업로드 완료")

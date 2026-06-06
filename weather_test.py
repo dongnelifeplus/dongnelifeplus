@@ -79,7 +79,15 @@ if int(pop) >= 60:
     print("한줄요약: 우산을 챙기는 것이 좋겠습니다.")
 else:
     print("한줄요약: 외출하기 무난한 날씨입니다.")
-    html = f"""
+
+    # -----------------------------
+# Opportunity Score 임시 데이터
+# -----------------------------
+opportunity_score = 82
+saving_amount = 74000
+benefit_count = 3
+
+html = f"""
 <html>
 <head>
     <meta charset="utf-8">
@@ -95,6 +103,16 @@ else:
 <p>현재 기온 : {temp}도</p>
 <p>강수확률 : {pop}%</p>
 <p>하늘상태 : {sky_text}</p>
+
+<hr>
+
+<h2>오늘의 기회 점수</h2>
+
+<p>Opportunity Score : {opportunity_score}점</p>
+
+<p>발견된 혜택 : {benefit_count}건</p>
+
+<p>예상 절감액 : {saving_amount:,}원</p>
 
 <hr>
 

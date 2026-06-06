@@ -1,37 +1,178 @@
-
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>우리동네라이프플러스</title>
+<meta charset="utf-8">
+<title>우리동네라이프플러스</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f6fb;
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.score{
+    font-size:60px;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.benefit{
+    padding:12px;
+    border-bottom:1px solid #eee;
+}
+
+</style>
 </head>
 
 <body>
 
 <h1>우리동네라이프플러스</h1>
 
-<h2>오늘의 날씨</h2>
+<div class="card">
 
-<p>현재 기온 : 14도</p>
-<p>강수확률 : 20%</p>
-<p>하늘상태 : 구름많음</p>
+<h2>내 정보 등록</h2>
 
-<hr>
+<input id="name" placeholder="이름">
 
-<h2>오늘의 기회 점수</h2>
+<input id="age" type="number" placeholder="나이">
 
-<p>Opportunity Score : 82점</p>
+<select id="area">
+<option>관양동</option>
+<option>범계동</option>
+<option>평촌동</option>
+<option>비산동</option>
+</select>
 
-<p>발견된 혜택 : 3건</p>
+<select id="car">
+<option value="yes">차량 있음</option>
+<option value="no">차량 없음</option>
+</select>
 
-<p>예상 절감액 : 74,000원</p>
+<button onclick="registerUser()">
+등록하기
+</button>
 
-<hr>
+</div>
 
-<h2>AI 생활 추천</h2>
+<div class="card">
+<h2 id="username">사용자</h2>
+<p id="areaText"></p>
+</div>
 
-<p>
-외출하기 무난한 날씨입니다.
-</p>
+<div class="card">
+<h2>Opportunity Score</h2>
+<div id="score" class="score">0</div>
+<p id="saving"></p>
+</div>
+
+<div class="card">
+<h2>추천 혜택</h2>
+<div id="benefits"></div>
+</div>
+
+<script>
+
+function registerUser(){
+
+const name =
+document.getElementById("name").value;
+
+const age =
+document.getElementById("age").value;
+
+const area =
+document.getElementById("area").value;
+
+const car =
+document.getElementById("car").value;
+
+fetch(
+`/api/register?name=${name}&age=${age}&area=${area}&car=${car}`
+)
+.then(res=>res.json())
+.then(data=>{
+
+alert("등록 완료");
+
+loadDashboard();
+
+});
+
+}
+
+function loadDashboard(){
+
+fetch("/api/dashboard")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("username").innerHTML =
+data.name + "님";
+
+document.getElementById("areaText").innerHTML =
+"지역 : " + data.area;
+
+document.getElementById("score").innerHTML =
+data.score;
+
+document.getElementById("saving").innerHTML =
+"예상 절감액 : "
++ data.saving.toLocaleString()
++ "원";
+
+let html="";
+
+data.benefits.forEach(item=>{
+
+html += `
+<div class="benefit">
+<b>✔ ${item.title}</b><br>
+${item.reason}<br>
+예상 절감액 :
+${item.saving.toLocaleString()}원
+</div>
+`;
+
+});
+
+document.getElementById("benefits").innerHTML =
+html;
+
+});
+
+}
+
+loadDashboard();
+
+</script>
 
 </body>
 </html>

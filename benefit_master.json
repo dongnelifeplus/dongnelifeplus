@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "title": "안양시 청년 월세 지원",
+    "region": "안양시",
+    "category": "청년",
+    "target": ["청년"],
+    "required": [
+      {
+        "field": "age",
+        "operator": "between",
+        "min": 19,
+        "max": 39,
+        "label": "청년 연령 조건"
+      },
+      {
+        "field": "area",
+        "operator": "contains",
+        "value": "안양",
+        "label": "안양시 거주"
+      },
+      {
+        "field": "house",
+        "operator": "equals",
+        "value": "무주택",
+        "label": "무주택 여부"
+      }
+    ],
+
+    "exclude_notice": [
+      "개인회생",
+      "파산",
+      "연체"
+    ],
+    "amount": 200000,
+    "deadline": "2026-12-31",
+    "source": "안양시청",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  },
+  {
+    "id": 2,
+    "title": "청년 전세보증금 대출 지원",
+    "region": "경기도",
+    "category": "주거",
+    "target": ["청년"],
+    "amount": 1000000,
+    "deadline": "2026-12-31",
+    "source": "경기도청",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  },
+  {
+    "id": 3,
+    "title": "출산가정 육아지원금",
+    "region": "전국",
+    "category": "육아",
+    "target": ["부모"],
+    "amount": 500000,
+    "deadline": "2026-12-31",
+    "source": "복지로",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  },
+  {
+    "id": 4,
+    "title": "기초생활수급자 생활지원",
+    "region": "전국",
+    "category": "복지",
+    "target": ["복지"],
+    "amount": 300000,
+    "deadline": "2026-12-31",
+    "source": "복지로",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  },
+  {
+    "id": 5,
+    "title": "소상공인 정책자금",
+    "region": "전국",
+    "category": "소상공인",
+    "target": ["사업자"],
+    "amount": 5000000,
+    "deadline": "2026-12-31",
+    "source": "K-Startup",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  },
+  {
+    "id": 6,
+    "title": "전기요금 복지할인",
+    "region": "전국",
+    "category": "에너지",
+    "target": ["전체"],
+    "amount": 30000,
+    "deadline": "2026-12-31",
+    "source": "한국전력",
+    "link": "",
+    "status": "active",
+    "created_at": "2026-06-09"
+  }
+]

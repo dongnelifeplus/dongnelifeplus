@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>내 혜택 프로필</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    background:#f5f7fb;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    box-sizing:border-box;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.save-btn{
+    background:#2563eb;
+    color:white;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h1>👤 내 혜택 프로필</h1>
+
+<p>입력할수록 혜택 분석 정확도가 높아집니다.</p>
+
+<h2>👤 기본정보</h2>
+
+<label>이름</label>
+<input type="text" id="name">
+
+<label>생년월일</label>
+<input type="date" id="birth">
+
+<label>성별</label>
+<select id="gender">
+    <option value="">선택</option>
+    <option value="남">남성</option>
+    <option value="여">여성</option>
+</select>
+
+<label>거주지역</label>
+<input type="text" id="region">
+
+<label>상세주소(동)</label>
+<input type="text" id="district">
+
+<hr>
+
+<h2>👨‍👩‍👧 가족정보</h2>
+
+<label>결혼 여부</label>
+<select id="marriage">
+    <option value="">선택</option>
+    <option value="미혼">미혼</option>
+    <option value="기혼">기혼</option>
+</select>
+
+<label>세대주 여부</label>
+<select id="household_head">
+    <option value="">선택</option>
+    <option value="예">예</option>
+    <option value="아니오">아니오</option>
+</select>
+
+<label>가구원 수</label>
+<input type="number" id="household_size">
+
+<label>자녀 수</label>
+<input type="number" id="children_count">
+
+<label>첫째 출생년도</label>
+<input type="number" id="child1">
+
+<label>둘째 출생년도</label>
+<input type="number" id="child2">
+
+<label>셋째 출생년도</label>
+<input type="number" id="child3">
+
+<hr>
+
+<h2>🏠 주거정보</h2>
+
+<label>주택 보유 여부</label>
+<select id="house_ownership">
+    <option value="">선택</option>
+    <option value="무주택">주택 없음</option>
+    <option value="1주택">1주택</option>
+    <option value="2주택">2주택</option>
+    <option value="3주택이상">3주택 이상</option>
+</select>
+
+<label>거주형태</label>
+<select id="housing_type">
+    <option value="">선택</option>
+    <option value="자가">자가</option>
+    <option value="전세">전세</option>
+    <option value="월세">월세</option>
+    <option value="공공임대">공공임대</option>
+</select>
+
+<hr>
+
+<h2>💰 소득정보</h2>
+
+<label>연소득</label>
+<input type="number" id="annual_income">
+
+<label>건강보험료</label>
+<input type="number" id="health_insurance">
+
+<hr>
+
+<h2>💼 직업정보</h2>
+
+<label>현재 상태</label>
+
+<select id="status">
+    <option value="">선택</option>
+    <option value="재직중">재직중</option>
+    <option value="구직중">구직중</option>
+    <option value="창업준비">창업준비</option>
+    <option value="사업운영">사업운영</option>
+    <option value="학생">학생</option>
+    <option value="은퇴">은퇴</option>
+</select>
+
+<label>직업</label>
+<input type="text" id="job">
+
+<hr>
+
+<h2>🏪 사업자정보</h2>
+
+<label>사업자 유형</label>
+
+<select id="business_type">
+    <option value="">해당없음</option>
+    <option value="개인사업자">개인사업자</option>
+    <option value="법인사업자">법인사업자</option>
+    <option value="예비창업자">예비창업자</option>
+</select>
+
+<label>업종</label>
+
+<select id="industry">
+
+<option value="">선택</option>
+
+<option value="도소매">도소매</option>
+<option value="음식점">음식점</option>
+<option value="카페">카페</option>
+<option value="숙박업">숙박업</option>
+
+<option value="IT">IT</option>
+<option value="소프트웨어">소프트웨어</option>
+
+<option value="교육">교육</option>
+<option value="학원">학원</option>
+
+<option value="제조업">제조업</option>
+<option value="건설업">건설업</option>
+
+<option value="운수업">운수업</option>
+<option value="물류업">물류업</option>
+
+<option value="농업">농업</option>
+<option value="축산업">축산업</option>
+<option value="어업">어업</option>
+
+<option value="서비스업">서비스업</option>
+
+<option value="기타">기타</option>
+
+</select>
+
+<label>업력</label>
+
+<select id="business_years">
+
+<option value="">선택</option>
+<option value="예비창업">예비창업</option>
+<option value="1년미만">1년 미만</option>
+<option value="1~3년">1~3년</option>
+<option value="3~7년">3~7년</option>
+<option value="7년이상">7년 이상</option>
+
+</select>
+
+<label>연매출</label>
+<input type="number" id="annual_sales">
+
+<hr>
+
+<h2>🛟 복지대상 추가정보</h2>
+
+<label>기초생활수급자</label>
+
+<select id="basic_living">
+
+<option value="">선택</option>
+<option value="예">예</option>
+<option value="아니오">아니오</option>
+
+</select>
+
+<label>차상위계층</label>
+
+<select id="near_poverty">
+
+<option value="">선택</option>
+<option value="예">예</option>
+<option value="아니오">아니오</option>
+
+</select>
+
+<label>한부모가정</label>
+
+<select id="single_parent">
+
+<option value="">선택</option>
+<option value="예">예</option>
+<option value="아니오">아니오</option>
+
+</select>
+
+<label>국가유공자</label>
+
+<select id="veteran">
+
+<option value="">선택</option>
+<option value="예">예</option>
+<option value="아니오">아니오</option>
+
+</select>
+
+<label>장애 여부</label>
+
+<select id="disabled">
+    <option value="">선택</option>
+    <option value="없음">없음</option>
+    <option value="있음">있음</option>
+</select>
+
+<select id="disability_type">
+
+<option value="">선택</option>
+
+<option value="지체">지체</option>
+<option value="시각">시각</option>
+<option value="청각">청각</option>
+<option value="언어">언어</option>
+<option value="지적">지적</option>
+<option value="자폐">자폐</option>
+<option value="정신">정신</option>
+<option value="뇌병변">뇌병변</option>
+<option value="신장">신장</option>
+<option value="심장">심장</option>
+<option value="호흡기">호흡기</option>
+<option value="간">간</option>
+
+<option value="기타">기타</option>
+
+</select>
+
+<label>장애 정도</label>
+
+<select id="disability_level">
+    <option value="">선택</option>
+    <option value="심함">심함</option>
+    <option value="심하지않음">심하지 않음</option>
+</select>
+
+<hr>
+
+<<h2>🚗 차량정보</h2>
+
+<label>차량 보유</label>
+
+<select id="car_ownership">
+    <option value="">선택</option>
+    <option value="없음">없음</option>
+    <option value="있음">있음</option>
+</select>
+
+<label>차량 종류</label>
+
+<select id="car_type">
+    <option value="">선택</option>
+    <option value="경차">경차</option>
+    <option value="소형">소형</option>
+    <option value="준중형">준중형</option>
+    <option value="중형">중형</option>
+    <option value="대형">대형</option>
+    <option value="SUV">SUV</option>
+    <option value="승합차">승합차</option>
+    <option value="화물차">화물차</option>
+    <option value="전기차">전기차</option>
+    <option value="수소차">수소차</option>
+    <option value="이륜차">이륜차</option>
+</select>
+
+<label>차량 연식</label>
+
+<input
+type="number"
+id="car_year"
+placeholder="예: 2022"
+>
+
+<label>차량 인승</label>
+
+<select id="car_seat">
+    <option value="">선택</option>
+    <option value="2">2인승</option>
+    <option value="4">4인승</option>
+    <option value="5">5인승</option>
+    <option value="7">7인승</option>
+    <option value="9">9인승</option>
+    <option value="11">11인승 이상</option>
+</select>
+
+<label>배기량</label>
+
+<select id="engine_cc">
+    <option value="">선택</option>
+    <option value="1000이하">1000cc 이하</option>
+    <option value="1600이하">1600cc 이하</option>
+    <option value="2000이하">2000cc 이하</option>
+    <option value="3000이하">3000cc 이하</option>
+    <option value="3000이상">3000cc 이상</option>
+</select>
+
+<label>친환경차 여부</label>
+
+<select id="eco_car">
+    <option value="">선택</option>
+    <option value="일반">일반</option>
+    <option value="하이브리드">하이브리드</option>
+    <option value="플러그인하이브리드">플러그인 하이브리드</option>
+    <option value="전기차">전기차</option>
+    <option value="수소차">수소차</option>
+</select>
+
+<hr>
+
+<h2>🎓 교육정보</h2>
+
+<label>학력</label>
+
+<select id="education">
+    <option value="">선택</option>
+    <option value="고졸">고졸</option>
+    <option value="대학재학">대학재학</option>
+    <option value="대졸">대졸</option>
+    <option value="석사">석사</option>
+    <option value="박사">박사</option>
+</select>
+
+<hr>
+
+<h2>🎯 생활정보</h2>
+
+<label>통신사</label>
+<input type="text" id="telecom">
+
+<label>관심사</label>
+<input type="text" id="interests">
+
+<button class="save-btn" onclick="saveProfile()">
+저장
+</button>
+
+</div>
+
+<script>
+
+async function saveProfile() {
+
+    const profile = {
+        name: document.getElementById("name").value,
+        birth: document.getElementById("birth").value,
+        gender: document.getElementById("gender").value,
+        region: document.getElementById("region").value,
+        district: document.getElementById("district").value,
+
+        marriage: document.getElementById("marriage").value,
+        household_head: document.getElementById("household_head").value,
+        household_size: document.getElementById("household_size").value,
+        children_count: document.getElementById("children_count").value,
+
+        house_ownership: document.getElementById("house_ownership").value,
+        housing_type: document.getElementById("housing_type").value,
+
+        annual_income: document.getElementById("annual_income").value,
+        health_insurance: document.getElementById("health_insurance").value,
+
+        status: document.getElementById("status").value,
+        job: document.getElementById("job").value,
+
+        business_type: document.getElementById("business_type").value,
+        industry: document.getElementById("industry").value,
+        annual_sales: document.getElementById("annual_sales").value,
+
+        disabled: document.getElementById("disabled").value,
+        disability_type: document.getElementById("disability_type").value,
+        disability_level: document.getElementById("disability_level").value,
+
+        car_ownership: document.getElementById("car_ownership").value,
+        car_type: document.getElementById("car_type").value,
+        car_year: document.getElementById("car_year").value,
+
+        education: document.getElementById("education").value,
+
+        telecom: document.getElementById("telecom").value,
+        interests: document.getElementById("interests").value
+    };
+
+    const response = await fetch("/api/profile", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(profile)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+        alert("저장되었습니다.");
+    } else {
+        alert("저장 실패");
+    }
+}
+
+async function loadProfile() {
+
+    const response =
+        await fetch("/api/profile");
+
+    const data =
+        await response.json();
+
+    if(!data){
+        return;
+    }
+
+    document.getElementById("name").value =
+        data.name || "";
+
+    document.getElementById("birth").value =
+        data.birth || "";
+
+    document.getElementById("gender").value =
+        data.gender || "";
+
+    document.getElementById("region").value =
+        data.region || "";
+
+    document.getElementById("district").value =
+        data.district || "";
+
+    document.getElementById("marriage").value =
+        data.marriage || "";
+
+    document.getElementById("household_head").value =
+        data.household_head || "";
+
+    document.getElementById("household_size").value =
+        data.household_size || "";
+
+    document.getElementById("children_count").value =
+        data.children_count || "";
+
+    document.getElementById("house_ownership").value =
+        data.house_ownership || "";
+
+    document.getElementById("housing_type").value =
+        data.housing_type || "";
+
+    document.getElementById("annual_income").value =
+        data.annual_income || "";
+
+    document.getElementById("health_insurance").value =
+        data.health_insurance || "";
+
+    document.getElementById("status").value =
+        data.status || "";
+
+    document.getElementById("job").value =
+        data.job || "";
+
+    document.getElementById("business_type").value =
+        data.business_type || "";
+
+    document.getElementById("industry").value =
+        data.industry || "";
+
+    document.getElementById("annual_sales").value =
+        data.annual_sales || "";
+
+    document.getElementById("disabled").value =
+        data.disabled || "";
+
+    document.getElementById("disability_type").value =
+        data.disability_type || "";
+
+    document.getElementById("disability_level").value =
+        data.disability_level || "";
+
+    document.getElementById("car_ownership").value =
+        data.car_ownership || "";
+
+    document.getElementById("car_type").value =
+        data.car_type || "";
+
+    document.getElementById("car_year").value =
+        data.car_year || "";
+
+    document.getElementById("education").value =
+        data.education || "";
+
+    document.getElementById("telecom").value =
+        data.telecom || "";
+
+    document.getElementById("interests").value =
+        data.interests || "";
+
+}
+
+
+function focusField(){
+
+    const field =
+        localStorage.getItem(
+            "focusField"
+        );
+
+    if(!field){
+        return;
+    }
+
+    const map = {
+
+        "거주지역":"region",
+
+        "주택보유":"housing",
+
+        "자녀수":"children"
+
+    };
+
+    const targetId =
+        map[field];
+
+    if(!targetId){
+        return;
+    }
+
+    const target =
+        document.getElementById(
+            targetId
+        );
+
+    if(target){
+
+        target.scrollIntoView({
+            behavior:"smooth"
+        });
+
+        target.focus();
+
+    }
+
+    localStorage.removeItem(
+        "focusField"
+    );
+
+}
+
+loadProfile();
+focusField();
+
+</script>
+
+</body>
+</html>

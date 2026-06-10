@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>우리동네라이프플러스 - 대시보드</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#fff;
+padding:15px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+h2,h3{
+margin:5px 0;
+}
+
+.button-row{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.primary{
+background:#2563eb;
+color:white;
+}
+
+.secondary{
+background:#e5e7eb;
+}
+
+.benefit{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.fit{
+font-weight:bold;
+color:#2563eb;
+}
+
+.hidden{
+color:#666;
+font-size:14px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>👤 내 프로필</h2>
+
+<p>
+정보완성도 :
+<strong id="profile_score">0%</strong>
+</p>
+
+<p>
+현재 발견 혜택 :
+<strong id="benefit_count">0건</strong>
+</p>
+
+<p>
+추가 발견 가능 혜택 :
+<strong id="hidden_count">0건</strong>
+</p>
+
+<p>
+예상 지원금 :
+<strong id="saving">0원</strong>
+</p>
+
+<hr>
+
+<p>
+정보를 입력할수록 맞춤 혜택을 더 많이 발견할 수 있습니다.
+</p>
+
+<div class="button-row">
+
+<button class="primary">
+🔗 자동 연동하기
+</button>
+
+<button class="secondary">
+✍ 직접 입력하기
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>🎁 추천 혜택</h3>
+
+<div id="benefits">
+불러오는 중...
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>🔍 추가 발견 가능 혜택</h3>
+
+<div id="hidden_benefits">
+불러오는 중...
+</div>
+
+</div>
+
+<script>
+
+async function loadDashboard(){
+
+const response = await fetch("/api/dashboard");
+const data = await response.json();
+
+document.getElementById("profile_score").innerText =
+data.profile_score + "%";
+
+document.getElementById("benefit_count").innerText =
+data.benefit_count + "건";
+
+document.getElementById("hidden_count").innerText =
+data.hidden_count + "건";
+
+document.getElementById("saving").innerText =
+data.saving.toLocaleString() + "원";
+
+let benefitHtml="";
+
+data.benefits.forEach(item=>{
+
+benefitHtml += `
+<div class="benefit">
+<div><strong>${item.title}</strong></div>
+<div class="fit">적합도 ${item.fit}%</div>
+<div>${item.reason}</div>
+</div>
+`;
+
+});
+
+document.getElementById("benefits").innerHTML =
+benefitHtml;
+
+let hiddenHtml="";
+
+data.hidden_benefits.forEach(item=>{
+
+hiddenHtml += `
+<div class="hidden">
+${item.title}
+(적합도 ${item.fit}%)
+</div>
+`;
+
+});
+
+document.getElementById("hidden_benefits").innerHTML =
+hiddenHtml;
+
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

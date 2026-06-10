@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>?곕━?숇꽕?쇱씠?꾪뵆?ъ뒪</title>
+</head>
+<body>
+
+<h1>?볦튂怨??덈뒗 ?덇낵 ?쒗깮??李얠븘?쒕┰?덈떎</h1>
+
+<p>?꾩옱 ?깅줉 ?쒗깮</p>
+
+<h2 id="benefitCount">0</h2>
+
+<hr>
+
+<h3>?쒗깮 紐⑸줉</h3>
+
+<div id="benefits"></div>
+
+<script>
+
+async function loadBenefits(){
+
+    const res =
+        await fetch("/api/master-benefits");
+
+    const data =
+        await res.json();
+
+    document.getElementById(
+        "benefitCount"
+    ).innerText = data.length;
+
+    let html = "";
+
+    data.forEach(item => {
+
+        html += `
+        <div style="
+            border:1px solid #ddd;
+            margin:10px;
+            padding:10px;
+        ">
+            <h4>${item.title}</h4>
+            <p>${item.region}</p>
+            <p>${item.category}</p>
+            <p>${item.amount.toLocaleString()}원</p>
+        </div>
+        `;
+    });
+
+    document.getElementById(
+        "benefits"
+    ).innerHTML = html;
+}
+
+loadBenefits();
+
+</script>
+
+</body>
+</html>

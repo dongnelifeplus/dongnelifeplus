@@ -1,201 +1,571 @@
-<html>
+﻿<!DOCTYPE html>
 
+<html lang="ko">
 <head>
-<meta charset="utf-8">
-
+<meta charset="UTF-8">
+<title>우리동네라이프플러스</title>
 <style>
-
 body{
-    font-family:Arial;
-    max-width:900px;
+    font-family: Arial, sans-serif;
+    max-width:1200px;
     margin:auto;
     padding:20px;
     background:#f5f7fb;
 }
 
 .card{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.benefit{
+border:1px solid #ddd;
+padding:15px;
+border-radius:10px;
+background:white;
+box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+#benefits{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.pass{
+color:green;
+font-weight:bold;
+}
+
+.fail{
+color:red;
+font-weight:bold;
+}
+
+.unknown{
+color:orange;
+font-weight:bold;
 }
 
 .score{
-    font-size:48px;
-    color:#2563eb;
-    font-weight:bold;
-}
-
-input,select{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:12px;
+font-size:20px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-right:5px;
 }
 
-.benefit-card{
+h1{
+color:#333;
+}
+
+.completion-card{
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:12px;
+    width:0%;
+    border-radius:20px;
+    transition:0.5s;
+    background:#4CAF50;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.dashboard-item{
     background:white;
-    border-radius:10px;
-    padding:12px;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    border:1px solid #eee;
+}
+
+.dashboard-item h3{
+    font-size:16px;
     margin-bottom:10px;
-    border:1px solid #ddd;
+}
+
+.dashboard-item h2{
+    color:#2563eb;
 }
 
 </style>
 
 </head>
-
 <body>
 
-<h1>우리동네라이프플러스</h1>
-
 <div class="card">
+    <h1>우리동네라이프플러스</h1>
 
-<h2>내 정보 등록</h2>
+<p>놓치고 있는 혜택과 지원금을 찾아드립니다.</p>
 
-<input id="name" placeholder="이름">
+<div class="dashboard">
 
-<input id="age" type="number" placeholder="나이">
+    <div class="dashboard-item">
 
-<select id="gender">
-<option value="남성">남성</option>
-<option value="여성">여성</option>
-</select>
+        <h3>💰 내 예상 혜택 가치</h3>
 
-<select id="area">
-<option value="관양동">관양동</option>
-<option value="평촌동">평촌동</option>
-<option value="비산동">비산동</option>
-<option value="범계동">범계동</option>
-</select>
+        <h2 id="lifeAsset">
+            계산중...
+        </h2>
 
-<select id="family">
-<option value="1인">1인 가구</option>
-<option value="2인">2인 가구</option>
-<option value="3인">3인 이상 가구</option>
-</select>
+    </div>
 
-<select id="income">
-<option value="100이하">월소득 100만원 이하</option>
-<option value="200이하">월소득 200만원 이하</option>
-<option value="300이하">월소득 300만원 이하</option>
-<option value="500이하">월소득 500만원 이하</option>
-<option value="500초과">월소득 500만원 초과</option>
-</select>
+    <div class="dashboard-item">
 
-<select id="job">
-<option value="직장인">직장인</option>
-<option value="자영업자">자영업자</option>
-<option value="프리랜서">프리랜서</option>
-<option value="학생">학생</option>
-<option value="무직">무직</option>
-</select>
+        <h3>🎁 발견된 혜택</h3>
 
-<select id="house">
-<option value="자가">자가</option>
-<option value="전세">전세</option>
-<option value="월세">월세</option>
-<option value="공공임대">공공임대</option>
-</select>
+        <h2 id="foundBenefitCount">
+            0건
+        </h2>
 
-<select id="business">
-<option value="없음">사업자 없음</option>
-<option value="개인사업자">개인사업자</option>
-<option value="법인사업자">법인사업자</option>
-</select>
+    </div>
 
-<select id="marriage">
-<option value="미혼">미혼</option>
-<option value="기혼">기혼</option>
-</select>
+    <div class="dashboard-item">
 
-<select id="children">
-<option value="0">자녀 없음</option>
-<option value="1">자녀 1명</option>
-<option value="2">자녀 2명</option>
-<option value="3">자녀 3명 이상</option>
-</select>
+        <h3>⚡ 지금 신청 가능</h3>
 
-<select id="car">
-<option value="yes">차량 있음</option>
-<option value="no">차량 없음</option>
-</select>
+        <h2 id="readyBenefitCount">
+            0건
+        </h2>
 
-<button onclick="registerUser()">등록하기</button>
+    </div>
+
 
 </div>
 
 <div class="card">
-<h2>사용자</h2>
-<div id="users"></div>
+
+<h2>👤 내 프로필</h2>
+
+<p>
+프로필 완성도
+<span id="profileCompletion">
+33%
+</span>
+</p>
+
+<div class="completion-card">
+
+    <div class="progress">
+
+        <div
+            id="profile-progress"
+            class="progress-bar">
+        </div>
+
+    </div>
+
+</div>
+
+<button
+onclick="location.href='/profile'"
+style="
+margin-left:10px;
+font-size:12px;
+padding:4px 8px;
+"
+>
+⚡ 프로필 완성하기
+</button>
+
+</p>
+
+<p>
+추천 정확도
+<span id="recommendationAccuracy">
+0%
+</span>
+</p>
+
+<p>
+발견 혜택
+<span id="foundBenefits">
+6건
+</span>
+</p>
+
+<p>
+미입력 정보
+<span id="missingInfo">
+0건
+</span>
+</p>
+
+<div id="missingInfoList">
+</div>
+<div class="card">
+
+<h3>
+📋 지금 하면 좋은 일
+</h3>
+
+<div id="todoList">
+
+불러오는 중...
+
+</div>
+
 </div>
 
 <div class="card">
-<h2>Opportunity Score</h2>
-<div class="score" id="score">0</div>
-</div>
 
-<div class="card">
-<h2>추천 혜택</h2>
+<h3>혜택 목록</h3>
+
 <div id="benefits"></div>
+
 </div>
 
 <script>
 
-async function registerUser(){
+async function loadStats(){
 
-    const name=document.getElementById("name").value;
-    const age=document.getElementById("age").value;
-    const gender=document.getElementById("gender").value;
-    const area=document.getElementById("area").value;
-    const family=document.getElementById("family").value;
-    const income=document.getElementById("income").value;
-    const job=document.getElementById("job").value;
-    const house=document.getElementById("house").value;
-    const business=document.getElementById("business").value;
-    const marriage=document.getElementById("marriage").value;
-    const children=document.getElementById("children").value;
-    const car=document.getElementById("car").value;
+    const res = await fetch("/api/stats");
+    const data = await res.json();
 
-    await fetch(
-        `/api/register?name=${name}&age=${age}&gender=${gender}&area=${area}&family=${family}&income=${income}&job=${job}&house=${house}&business=${business}&marriage=${marriage}&children=${children}&car=${car}`
-    );
+    document.getElementById("benefitCount").innerText =
+        data.benefit_count || 0;
 
-    loadUsers();
+    document.getElementById("savingAmount").innerText =
+        (data.total_amount || 0).toLocaleString() + "원";
 }
 
-async function loadUsers(){
+async function loadBenefits(){
 
-    const res=await fetch("/api/users");
-    const users=await res.json();
+    const benefitRes =
+        await fetch("/api/master-benefits");
 
-    let html="";
+    const benefits =
+        await benefitRes.json();
 
-    users.forEach(user=>{
+    const eligibilityRes =
+        await fetch("/api/eligibility");
 
-        html+=`
-        <div class="benefit-card">
-        <b>${user.name}</b><br>
-        ${user.age}세 / ${user.area}<br>
-        ${user.job}
+    const eligibility =
+        await eligibilityRes.json();
+
+    let html = "";
+
+    benefits.forEach((item,index) => {
+
+        const score = eligibility[index];
+
+        let badge = "🔴";
+
+        if(score.rate >= 100){
+            badge = "🟢";
+        }
+        else if(score.rate > 0){
+            badge = "🟡";
+        }
+
+        html += `
+        <div class="benefit">
+
+            <h3>${item.title}</h3>
+
+            <div class="score">
+                ${badge}
+                자격 충족률 ${score.rate}%
+            </div>
+
+            <p>
+                조건 총 ${score.total}건
+            </p>
+
+            <p>
+                <span class="pass">충족 ${score.pass}건</span> /
+                <span class="fail">미충족 ${score.fail}건</span> /
+                <span class="unknown">미확인 ${score.unknown}건</span>
+            </p>
+
+            <hr>
+
+            ${score.details.map(d => {
+
+                if(d.result === "pass"){
+                    return `<p class="pass">✓ ${d.label}</p>`;
+                }
+
+                if(d.result === "fail"){
+                    return `<p class="fail">✗ ${d.label}</p>`;
+                }
+
+                    return `<p class="unknown">? ${d.label}</p>`;
+
+            }).join("")}
+
+            <hr>
+
+            <p>
+                지원금 :
+                ${item.amount.toLocaleString()}원
+            </p>
+
+            <p>
+                현재 상태
+            </p>
+
+            <select>
+                <option>발견</option>
+                <option>검토중</option>
+                <option>신청가능</option>
+                <option>신청완료</option>
+                <option>수령완료</option>
+            </select>
+
+            <br><br>
+
+            <button>
+                상세정보 입력
+            </button>
+
         </div>
         `;
     });
 
-    document.getElementById("users").innerHTML=html;
+        document.getElementById(
+        "benefits"
+    ).innerHTML = html;
 }
 
-loadUsers();
+async function loadProfileCompletion(){
+
+    const response =
+        await fetch(
+            "/api/profile-completion"
+        );
+
+    const data =
+        await response.json();
+
+    document.getElementById(
+        "profileCompletion"
+    ).innerText =
+        data.completion + "%";
+
+    const progressBar =
+        document.getElementById(
+            "profile-progress"
+        );
+
+    if(progressBar){
+
+        progressBar.style.width =
+            data.completion + "%";
+
+    }
+
+    const accuracy =
+        Math.min(
+            100,
+            data.completion + 20
+        );
+
+    const accuracyEl =
+        document.getElementById(
+            "recommendationAccuracy"
+        );
+
+    if(accuracyEl){
+
+        accuracyEl.innerText =
+            accuracy + "%";
+
+    }
+
+    const missingEl =
+        document.getElementById(
+            "missingInfo"
+        );
+
+    if(missingEl){
+
+        missingEl.innerText =
+            data.missing.length + "건";
+
+    }
+
+    const listEl =
+        document.getElementById(
+            "missingInfoList"
+        );
+
+    if(listEl){
+
+        let html =
+            `<p>🟡 미확인 정보 ${data.missing.length}건</p><ul>`;
+
+        data.missing.forEach(item => {
+
+            html +=
+                `<li>${item}</li>`;
+
+        });
+
+        html += "</ul>";
+
+        listEl.innerHTML =
+            html;
+
+        loadTodoList(data);
+
+    }
+
+}
+function loadTodoList(data){
+
+    const todoEl =
+        document.getElementById(
+            "todoList"
+        );
+
+    if(!todoEl){
+        return;
+    }
+
+    let html = "";
+
+    data.missing.forEach(item => {
+
+        html += `
+        <div style="
+            padding:10px;
+            margin-bottom:10px;
+            background:#fff8e8;
+            border-radius:8px;
+        ">
+
+            <p>
+                ${item}
+            </p>
+
+            <button
+                onclick="goProfile('${item}')"
+    >
+                확인하기
+            </button>
+
+        </div>
+        `;
+
+    });
+
+    todoEl.innerHTML = html;
+
+}
+
+async function loadDashboard(){
+
+    const response =
+        await fetch(
+            "/api/master-benefits"
+        );
+
+    const benefits =
+        await response.json();
+
+    let totalAmount = 0;
+
+    benefits.forEach(item => {
+
+        totalAmount += item.amount;
+
+    });
+
+    document.getElementById(
+        "lifeAsset"
+    ).innerText =
+        totalAmount.toLocaleString()
+        + "원";
+
+    document.getElementById(
+        "foundBenefitCount"
+    ).innerText =
+        benefits.length + "건";
+
+    document.getElementById(
+        "readyBenefitCount"
+    ).innerText =
+        Math.floor(
+            benefits.length * 0.3
+        ) + "건";
+
+}
+
+function showAccuracyPopup(){
+
+alert(
+    "정확도 향상\n\n" +
+    "현재 정확도 : 67%\n\n" +
+    "추가 확인 필요\n" +
+    "- 무주택 여부\n" +
+    "- 건강보험료\n" +
+    "- 자녀 수\n\n" +
+    "확인 시\n" +
+    "67% → 100%\n\n" +
+    "예상 추가 혜택 : +3건\n" +
+    "예상 추가 가치 : +240만원"
+);
+
+}
+function showAccuracyPopup(){
+
+alert(
+    "정확도 향상\n\n" +
+    "현재 정확도 : 67%\n\n" +
+    "추가 확인 필요\n" +
+    "- 무주택 여부\n" +
+    "- 건강보험료\n" +
+    "- 자녀 수\n\n" +
+    "확인 시\n" +
+    "67% → 100%\n\n" +
+    "예상 추가 혜택 : +3건\n" +
+    "예상 추가 가치 : +240만원"
+);
+
+}
+
+function goProfile(field){
+
+    localStorage.setItem(
+        "focusField",
+        field
+    );
+
+    location.href =
+        "/profile";
+
+}
+
+loadBenefits();
+loadProfileCompletion();
+loadDashboard();
 
 </script>
 

@@ -1,0 +1,32 @@
+[
+  {
+    "month":"2026-07",
+    "title":"국가건강검진",
+    "type":"health",
+    "status":"예정"
+  },
+  {
+    "month":"2026-08",
+    "title":"본인부담상한제 환급",
+    "type":"refund",
+    "status":"예상"
+  },
+  {
+    "month":"2026-09",
+    "title":"자동차세 납부",
+    "type":"tax",
+    "status":"예정"
+  },
+  {
+    "month":"2026-11",
+    "title":"에너지바우처 신청",
+    "type":"benefit",
+    "status":"예정"
+  },
+  {
+    "month":"2026-12",
+    "title":"연말정산 준비",
+    "type":"tax",
+    "status":"예정"
+  }
+]

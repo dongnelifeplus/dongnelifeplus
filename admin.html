@@ -1,0 +1,30 @@
+<thead>
+<tr>
+<th>이름</th>
+<th>전화번호</th>
+<th>상담유형</th>
+<th>가능시간</th>
+<th>요청사항</th>
+</tr>
+</thead>
+<tbody id="leadTable"></tbody>
+
+<script>
+async function loadLeads(){
+  const res=await fetch("/api/get-leads");
+  const data=await res.json();
+  let html="";
+  data.forEach(l=>{
+    html+=`<tr>
+      <td>${l.name}</td>
+      <td>${l.phone}</td>
+      <td>${l.type}</td>
+      <td>${l.time}</td>
+      <td>${l.memo}</td>
+    </tr>`;
+  });
+  document.getElementById("leadTable").innerHTML=html;
+}
+
+loadLeads();
+</script>

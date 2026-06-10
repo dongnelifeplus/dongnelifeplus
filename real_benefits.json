@@ -1,61 +1,42 @@
 [
-  {
-    "title": "안양시 지역화폐 캐시백",
-    "saving": 50000,
-    "area": "관양동",
-    "target": "전체",
-    "reason": "관양동 거주자 대상 혜택"
-  },
-  {
-    "title": "전기요금 절약 지원",
-    "saving": 30000,
-    "area": "관양동",
-    "target": "전체",
-    "reason": "생활비 절감 추천"
-  },
-  {
-    "title": "친환경 차량 지원",
-    "saving": 80000,
-    "area": "관양동",
-    "target": "차량",
-    "reason": "차량 보유자 대상 혜택"
-  },
-  {
-    "title": "청년 월세 지원",
-    "saving": 100000,
-    "area": "관양동",
-    "target": "청년",
-    "reason": "39세 이하 청년 대상"
-  },
-
-  {
-    "title": "범계역 교통비 지원",
-    "saving": 60000,
-    "area": "범계동",
-    "target": "전체",
-    "reason": "범계동 출퇴근 지원"
-  },
-  {
-    "title": "청년 취업 지원금",
-    "saving": 120000,
-    "area": "범계동",
-    "target": "청년",
-    "reason": "청년 취업 준비 지원"
-  },
-
-  {
-    "title": "평촌 문화센터 할인",
-    "saving": 40000,
-    "area": "평촌동",
-    "target": "전체",
-    "reason": "문화생활 비용 절감"
-  },
-
-  {
-    "title": "비산동 에너지 절약 사업",
-    "saving": 70000,
-    "area": "비산동",
-    "target": "전체",
-    "reason": "전기·가스 절약 지원"
-  }
+{
+"title": "안양시 생활안정 캐시백",
+"saving": 50000,
+"area": "안양시",
+"target": "전체",
+"reason": "안양시 거주자 생활지원",
+"link": "https://www.anyang.go.kr"
+},
+{
+"title": "청년 월세 지원",
+"saving": 200000,
+"area": "안양시",
+"target": "청년",
+"reason": "만 19세 ~ 39세 청년 대상",
+"link": "https://www.anyang.go.kr"
+},
+{
+"title": "소상공인 정책자금",
+"saving": 7000000,
+"area": "경기도",
+"target": "사업자",
+"reason": "소상공인 창업 및 운영 지원",
+"link": "https://www.bizinfo.go.kr"
+},
+{
+"title": "창업지원금",
+"saving": 5000000,
+"area": "경기도",
+"target": "사업자",
+"reason": "예비창업자 및 초기창업자 지원",
+"link": "https://www.k-startup.go.kr"
+},
+{
+"title": "전기요금 절감 지원",
+"saving": 30000,
+"area": "안양시",
+"target": "전체",
+"reason": "전기요금 부담 완화",
+"link": "https://www.anyang.go.kr"
+}
 ]

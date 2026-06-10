@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>우리동네라이프플러스 - 대시보드</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 1200px; margin: auto; padding: 20px; background: #f5f7fb; }
+.card { background: white; padding: 15px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+h2, h3 { margin: 5px 0; }
+button { padding: 8px 14px; margin-left: 5px; border-radius: 8px; border: none; cursor: pointer; }
+hr { border: none; border-top: 1px solid #ddd; margin: 15px 0; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.status { font-weight: bold; padding: 3px 6px; border-radius: 6px; color: white; font-size: 12px; }
+.status-green { background-color: #22c55e; }
+.status-orange { background-color: #f97316; }
+.status-red { background-color: #dc2626; }
+ul { margin: 5px 0 0 20px; }
+.hidden-benefit { font-size:13px; margin:3px 0; }
+</style>
+</head>
+<body>
+
+<!-- 프로필 카드 -->
+<div class="card">
+    <h2>👤 내 프로필</h2>
+    <div>정보완성도: <strong>43%</strong></div>
+    <div>현재 발견 혜택: <strong>7건</strong></div>
+    <div>추가 발견 가능 혜택: <strong>21건</strong></div>
+    <div style="color:#555; margin-top:5px;">
+        정보 입력 시 위 혜택 21건을 추가로 확인할 수 있습니다.
+    </div>
+
+    <hr>
+
+    <!-- 자동 연동 -->
+    <div>
+        <div><strong>🔗 자동 연동 사전예약</strong></div>
+        <div>은행·카드·통신비 자동 분석으로 생애주기, 관심사, 위치, 소비패턴 기반 맞춤 혜택 제공</div>
+        <div>정보완성도 예상: 43% → 100%</div>
+        <button onclick="autoSync()">자동 연동 사전예약</button>
+    </div>
+
+    <hr>
+
+    <!-- 직접 입력 -->
+    <div>
+        <div><strong>✍️ 직접 정보 입력</strong></div>
+        <div>관심사, 생활패턴, 위치정보 등 필요한 정보를 직접 입력하면 추가 혜택 21건이 자동 추천됩니다.</div>
+        <div>정보완성도 예상: 43% → 100%</div>
+        <button onclick="manualInput()">직접 입력하기</button>
+    </div>
+
+    <hr>
+
+    <!-- 부족 정보 표시 -->
+    <div>
+        <strong>부족한 정보:</strong>
+        <ul>
+            <li>관심사</li>
+            <li>생활패턴</li>
+            <li>위치정보</li>
+            <li>소비패턴</li>
+        </ul>
+        <div style="color:#555; margin-top:5px;">
+            부족한 정보를 입력하면 추가 혜택과 맞춤 추천이 즉시 적용됩니다.
+        </div>
+    </div>
+</div>
+
+<!-- 숨겨진 혜택 미리보기 -->
+<div class="card">
+    <h3>🔓 지금 입력하면 발견되는 혜택</h3>
+    <div class="hidden-benefit">청년월세지원 +240만원</div>
+    <div class="hidden-benefit">청년교통비지원 +12만원</div>
+    <div class="hidden-benefit">문화생활지원 +10만원</div>
+    <div class="hidden-benefit">+18건 더 있음</div>
+    <button onclick="viewAllHidden()">전체 보기</button>
+</div>
+
+<!-- 맞춤 혜택 카드 -->
+<div id="benefits"></div>
+
+<script>
+// 샘플 데이터
+const sampleBenefits = [
+    {title:"청년월세지원", eligibility:"만19~34세 · 무주택", news_content:"서울시 청년 월세 지원사업", fit:95, status:"🟠 마감임박", dday:"D-3", start_date:"06/10", end_date:"06/30", priority:10, status_color:"status-orange"},
+    {title:"벚꽃축제 할인", eligibility:"전 연령", news_content:"안양시 벚꽃축제 할인 이벤트", fit:88, status:"🟢 신청가능", dday:"", start_date:"06/10", end_date:"06/15", priority:5, status_color:"status-green"}
+];
+
+function loadBenefits(){
+    sampleBenefits.sort((a,b)=>b.priority - a.priority || b.fit - a.fit);
+    let html = "";
+    sampleBenefits.forEach(item=>{
+        html += `
+        <div class="card">
+            <div class="flex-between" style="margin-bottom:3px;">
+                <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
+                    <span class="status ${item.status_color}">${item.status} ${item.dday} (${item.start_date}~${item.end_date})</span>
+                </div>
+                <div style="display:flex;gap:6px;">
+                    <button onclick="saveFavorite('${item.title}')">★</button>
+                    <button onclick="savePlan('${item.title}')">🛒</button>
+                    <button onclick="saveAlert('${item.title}')">🔔</button>
+                </div>
+            </div>
+            <h3 style="margin:2px 0;font-size:16px;">${item.title}</h3>
+            <div style="margin:0;font-size:13px;color:#2563eb;">${item.eligibility}</div>
+            <p style="margin:2px 0 0 0;font-size:13px;">${item.news_content}</p>
+        </div>
+        `;
+    });
+    document.getElementById("benefits").innerHTML = html;
+}
+
+// 버튼 액션
+function autoSync(){ alert("자동 연동 사전예약이 등록되었습니다. 서비스 오픈 시 자동 혜택 분석이 시작됩니다."); }
+function manualInput(){ alert("직접 정보 입력 화면으로 이동합니다."); }
+function saveFavorite(title){ alert(`즐겨찾기 등록: ${title}`); }
+function savePlan(title){ alert(`신청 계획 등록: ${title}`); }
+function saveAlert(title){ alert(`알림 등록: ${title}`); }
+function viewAllHidden(){ alert("전체 숨겨진 혜택 보기 화면으로 이동"); }
+
+loadBenefits();
+</script>
+
+</body>
+</html>

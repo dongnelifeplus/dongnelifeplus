@@ -1,0 +1,44 @@
+[
+  {
+    "title": "소상공인 정책자금",
+    "target": "사업자",
+    "saving": 5000000,
+    "category": "정책자금",
+    "link": "https://www.semas.or.kr"
+  },
+  {
+    "title": "청년창업 지원사업",
+    "target": "사업자",
+    "saving": 10000000,
+    "category": "창업",
+    "link": "https://www.k-startup.go.kr"
+  },
+  {
+    "title": "스마트상점 지원사업",
+    "target": "사업자",
+    "saving": 3000000,
+    "category": "스마트상점",
+    "link": "https://www.semas.or.kr"
+  },
+  {
+    "title": "소상공인 전기요금 지원",
+    "target": "사업자",
+    "saving": 200000,
+    "category": "고정비절감",
+    "link": "https://www.semas.or.kr"
+  },
+  {
+    "title": "사업자 세무 컨설팅",
+    "target": "사업자",
+    "saving": 500000,
+    "category": "세무",
+    "link": "#"
+  },
+  {
+    "title": "노무 컨설팅 지원",
+    "target": "사업자",
+    "saving": 500000,
+    "category": "노무",
+    "link": "#"
+  }
+]

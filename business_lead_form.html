@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>사업자 무료 상담 신청</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f5f7fb;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h1>사업자 무료 상담 신청</h1>
+
+<p>
+정책자금·창업지원·정부지원사업
+무료 상담을 신청하세요.
+</p>
+
+<input
+id="name"
+placeholder="대표자명">
+
+<input
+id="phone"
+placeholder="연락처">
+
+<input
+id="bizno"
+placeholder="사업자등록번호">
+
+<textarea
+id="memo"
+placeholder="상담 요청 내용">
+</textarea>
+
+<button onclick="saveLead()">
+무료 상담 신청
+</button>
+
+</div>
+
+<script>
+
+async function saveLead(){
+
+    const lead = {
+
+        name:
+        document.getElementById(
+            "name"
+        ).value,
+
+        phone:
+        document.getElementById(
+            "phone"
+        ).value,
+
+        bizno:
+        document.getElementById(
+            "bizno"
+        ).value,
+
+        memo:
+        document.getElementById(
+            "memo"
+        ).value,
+
+        type:
+        "사업자상담",
+
+        time:
+        new Date().toLocaleString()
+    };
+
+    await fetch(
+        "/api/leads",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+            body:
+            JSON.stringify(lead)
+        }
+    );
+
+    alert(
+        "상담 신청 완료"
+    );
+
+}
+
+</script>
+
+</body>
+</html>

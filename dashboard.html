@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>우리동네라이프플러스</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    margin:0;
+    padding:20px;
+}
+
+.top-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.benefit-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:15px;
+}
+
+.benefit-card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+}
+
+.amount{
+    color:#2563eb;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.fit{
+    color:#16a34a;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="top-card">
+
+<h1>우리동네라이프플러스</h1>
+
+<h3>현재 발견된 혜택</h3>
+
+<div id="totalSaving" class="amount">
+0원
+</div>
+
+</div>
+
+<div id="benefits" class="benefit-grid"></div>
+
+<script>
+
+async function loadDashboard(){
+
+    const response = await fetch("/api/dashboard");
+    const data = await response.json();
+
+    document.getElementById("totalSaving").innerText =
+        data.saving.toLocaleString() + "원";
+
+    let html = "";
+
+    data.benefits.forEach(item=>{
+
+        html += `
+        <div class="benefit-card">
+
+            <h2>${item.title}</h2>
+
+            <div class="fit">
+                ⭐ 추천도 ${item.fit}%
+            </div>
+
+            <br>
+
+            <div class="amount">
+                ${item.saving.toLocaleString()}원
+            </div>
+
+            <br>
+
+            <div>
+                ${item.reason}
+            </div>
+
+            <br>
+
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+
+    <button onclick="saveFavorite('${item.title}')">
+        ⭐ 즐겨찾기
+    </button>
+
+    <button onclick="saveCart('${item.title}')">
+        🛒 담아두기
+    </button>
+
+    <button onclick="savePlan('${item.title}')">
+        📅 신청예정
+    </button>
+
+    <a href="${item.link}" target="_blank">
+        <button>
+            신청하기
+        </button>
+    </a>
+
+</div>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("benefits").innerHTML = html;
+
+}
+
+loadDashboard();
+
+async function saveFavorite(title){
+
+    await fetch("/api/favorite",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            user:"김정원",
+            benefit:title
+        })
+    });
+
+    alert("즐겨찾기에 저장되었습니다.");
+
+}
+
+function saveCart(title){
+
+    alert(title + " 담아두기 등록");
+
+}
+
+function savePlan(title){
+
+    alert(title + " 신청예정 등록");
+
+}
+
+</script>
+
+</body>
+</html>

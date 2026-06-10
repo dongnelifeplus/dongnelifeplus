@@ -1,9 +1,31 @@
 [
     {
-        "age": "44",
+        "name": "김정원",
+        "birth": "1982-04-26",
         "gender": "남",
         "region": "범계동",
-        "housing": "",
-        "children": ""
+        "district": "",
+        "marriage": "미혼",
+        "household_head": "아니오",
+        "household_size": "2",
+        "children_count": "0",
+        "house_ownership": "무주택",
+        "housing_type": "전세",
+        "annual_income": "",
+        "health_insurance": "",
+        "status": "구직중",
+        "job": "",
+        "business_type": "",
+        "industry": "",
+        "annual_sales": "",
+        "disabled": "없음",
+        "disability_type": "",
+        "disability_level": "",
+        "car_ownership": "없음",
+        "car_type": "",
+        "car_year": "",
+        "education": "",
+        "telecom": "",
+        "interests": ""
     }
 ]

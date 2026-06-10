@@ -1,0 +1,11 @@
+users.json
+user_logs.json
+subscribers.json
+leads.json
+favorites.json
+alerts.json
+calendar_events.json
+
+**pycache**/
+*.pyc
+.env
